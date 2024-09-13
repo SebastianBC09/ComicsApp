@@ -1,7 +1,7 @@
 export interface RegisterData {
   nombreUsuario: string;
   email: string;
-  password: string;
+  passwordHash: string;
 }
 
 export interface RegisterResponse {
