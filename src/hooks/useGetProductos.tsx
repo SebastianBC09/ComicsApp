@@ -1,9 +1,9 @@
 import React, {useEffect,useState} from 'react';
-import api from 'api/axiosConfig';
+import api from '../api/axiosConfig';
 import { AxiosResponse } from 'axios';
-import { Producto } from 'types/producto';
+import { Producto } from '../types/producto';
 
-const useGetProductos = () => {
+export const useGetProductos = () => {
   const [productos, setProductos] = useState<Producto[]>([]);
 
   const Productos = useEffect(() => {

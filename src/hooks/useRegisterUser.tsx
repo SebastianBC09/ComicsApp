@@ -3,11 +3,11 @@ import api from 'api/axiosConfig';
 import { AxiosResponse } from 'axios';
 import { RegisterData, RegisterResponse } from 'types/auth';
 
-const useRegisterUser = () => {
+export const useRegisterUser = () => {
   const [formData, setFormData] = useState<RegisterData>({
     nombreUsuario: '',
     email: '',
-    password: ''
+    passwordHash: ''
   });
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {

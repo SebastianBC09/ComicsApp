@@ -1,9 +1,9 @@
 import { useState } from 'react';
-import api from 'api/axiosConfig';
-import { LoginData, LoginResponse } from 'types/auth';
+import api from '../api/axiosConfig';
+import { LoginData, LoginResponse } from '../types/auth';
 import { AxiosResponse } from 'axios';
 
-const useLoginUser = () => {
+export const useLoginUser = () => {
   const [formData, setFormData] = useState<LoginData>({
     email: '',
     password: ''
