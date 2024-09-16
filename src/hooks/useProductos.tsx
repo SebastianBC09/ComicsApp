@@ -1,18 +1,18 @@
 import React, {useEffect,useState} from 'react';
-import api from '../api/axiosConfig';
-import { AxiosResponse } from 'axios';
-import { Producto } from '../types/producto';
-import { Categoria } from '../types/categoria';
+import { getCategories } from '../services/CategoryService';
+import { getProducts } from '../services/ProductService';
+import { Categoria } from '../types/category';
+import { Product } from '../types/product';
 
 export const useGetProductos = () => {
-  const [productos, setProductos] = useState<Producto[]>([]);
+  const [productos, setProductos] = useState<Product[]>([]);
   const [categorias, setCategorias] = useState<Categoria[]>([]);
 
-  const Productos = useEffect(() => {
+  useEffect(() => {
     const FetchProductos = async () => {
       try {
-        const response: AxiosResponse<Producto[]>  = await api.get('/productos');
-        setProductos(response.data);
+        const response = await getProducts()
+        setProductos(response);
       } catch (error) {
         console.error("Error al obtener los productos", error);
       }
@@ -20,11 +20,11 @@ export const useGetProductos = () => {
     FetchProductos();
   }, [])
 
-  const Categorias = useEffect(() => {
+  useEffect(() => {
     const FetchCategorias = async () => {
       try {
-        const response: AxiosResponse<Categoria[]>  = await api.get('productos/categorias');
-        setCategorias(response.data);
+        const response = await getCategories()
+        setCategorias(response);
       } catch (error) {
         console.error("Error al obtener las categorias", error);
       }
