@@ -1,40 +1,35 @@
 import React, { useState } from 'react'
 import { IonButton, IonButtons, IonHeader, IonIcon, IonSearchbar, IonTitle, IonToolbar, IonModal, IonSelectOption, IonSelect } from '@ionic/react'
-import { useProductos } from '../../hooks/useProductos'
 import { bookOutline, funnelOutline, filmOutline, pricetagOutline} from 'ionicons/icons'
+import { Categoria } from '../../types/category'
+import { Product } from '../../types/product'
 import './HeaderBar.css'
 
-export const HeaderBar:React.FC = () => {
-  const [searchQuery, setSearchQuery] = useState('');
-  const [filters, setfilters] = useState({editorial: '', genero: '', categoria: ''});
-  const [showFilters, setshowFilters] = useState(false);
-  const { productos, categorias } = useProductos();
+interface HeaderBarProps {
+  searchQuery: string;
+  onSearchChange: (event: CustomEvent) => void;
+  filters: any;
+  onFilterChange: (key: string, value: string) => void;
+  productos: Product[];
+  categorias: Categoria[];
+}
 
-  const handleSearchChange = (event: CustomEvent) => {
-    setSearchQuery(event.detail.value);
-  }
+export const HeaderBar:React.FC<HeaderBarProps> = ({
+  searchQuery,
+  onSearchChange,
+  filters,
+  onFilterChange,
+  productos,
+  categorias
+}) => {
+  const [showFilters, setShowFilters] = useState(false);
 
   const openFilters = () => {
-    setshowFilters(!showFilters);
+    setShowFilters(!showFilters);
   }
-
   const closeFilters = () => {
-    setshowFilters(false);
+    setShowFilters(false);
   }
-
-  const filteredProductos = productos.filter(producto =>
-    producto.titulo.toLowerCase().includes(searchQuery.toLowerCase()) &&
-    (filters.editorial === '' || producto.editorial === filters.editorial) &&
-    (filters.genero === '' || producto.genero === filters.genero) &&
-    (filters.categoria === '' || producto.categoriaId === parseInt(filters.categoria))
-  )
-
-  const handleFilterChange = (key: string, value: string) => {
-    setfilters({
-      ...filters,
-      [key]: value,
-    });
-  };
 
   return (
     <IonHeader>
@@ -45,7 +40,7 @@ export const HeaderBar:React.FC = () => {
       <IonToolbar>
         <IonSearchbar
         value={searchQuery}
-        onIonInput={handleSearchChange}
+        onIonInput={onSearchChange}
         placeholder='Realiza tu busqueda'
         animated/>
       </IonToolbar>
@@ -64,7 +59,7 @@ export const HeaderBar:React.FC = () => {
           <IonSelect
           placeholder="Selecciona editorial"
           value={filters.editorial}
-          onIonChange={(e: CustomEvent) => handleFilterChange('editorial', e.detail.value)}
+          onIonChange={(e: CustomEvent) => onFilterChange('editorial', e.detail.value)}
           >
             <IonIcon slot="start" icon={bookOutline}></IonIcon>
           <IonSelectOption value="">Todas las editoriales</IonSelectOption>
@@ -81,7 +76,7 @@ export const HeaderBar:React.FC = () => {
           <IonSelect
           placeholder="Selecciona genero"
           value={filters.genero}
-          onIonChange={(e: CustomEvent) => handleFilterChange('genero', e.detail.value)}
+          onIonChange={(e: CustomEvent) => onFilterChange('genero', e.detail.value)}
           >
           <IonIcon slot="start" icon={filmOutline}></IonIcon> {/* Icono de género */}
           <IonSelectOption value="">Todos los generos</IonSelectOption>
@@ -98,7 +93,7 @@ export const HeaderBar:React.FC = () => {
           <IonSelect
           placeholder="Selecciona categoria"
           value={filters.categoria}
-          onIonChange={(e: CustomEvent) => handleFilterChange('categoria', e.detail.value)}
+          onIonChange={(e: CustomEvent) => onFilterChange('categoria', e.detail.value)}
           >
             <IonIcon slot="start" icon={pricetagOutline}></IonIcon> {/* Icono de categoría */}
             <IonSelectOption value="">Todas las categorias</IonSelectOption>
@@ -112,14 +107,6 @@ export const HeaderBar:React.FC = () => {
           <IonButton onClick={closeFilters}>Cerrar</IonButton>
         </div>
       </IonModal>
-
-      <div>
-        {filteredProductos.map((producto) => (
-          <div>
-            {producto.titulo} - {producto.autor}
-          </div>
-        ))}
-      </div>
     </IonHeader>
   )
 }
