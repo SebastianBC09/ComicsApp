@@ -11,7 +11,6 @@ import {
 } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
 import { ellipse, square, triangle } from 'ionicons/icons';
-import Tab2 from './pages/Tab2';
 import Tab3 from './pages/Tab3';
 import Products from './pages/Products';
 
@@ -47,7 +46,6 @@ import './theme/variables.css';
 import { UserProvider } from './context/UserContext/UserProvider';
 import { WishlistProvider } from './context/WishlistContext/WishlistProvider';
 import Login from './pages/Login';
-import Wishlist from './pages/Wishlist';
 
 setupIonicReact({ mode: 'ios' });
 
@@ -61,24 +59,17 @@ const App: React.FC = () => (
               <Route exact path="/products">
                 <Products />
               </Route>
-              <Route exact path="/wishlist">
-                <Wishlist />
-              </Route>
               <Route path="/login">
                 <Login />
               </Route>
               <Route exact path="/">
-                <Redirect to="/tab1" />
+                <Redirect to="/products" />
               </Route>
             </IonRouterOutlet>
             <IonTabBar slot="bottom">
               <IonTabButton tab="products" href="/products">
                 <IonIcon aria-hidden="true" icon={triangle} />
                 <IonLabel>Products</IonLabel>
-              </IonTabButton>
-              <IonTabButton tab="wishlist" href="/wishlist">
-                <IonIcon aria-hidden="true" icon={ellipse} />
-                <IonLabel>Wishlist</IonLabel>
               </IonTabButton>
               <IonTabButton tab="login" href="/login">
                 <IonIcon aria-hidden="true" icon={square} />
