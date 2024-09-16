@@ -1,9 +1,11 @@
 import { useState } from 'react';
-import api from '../api/axiosConfig';
+import { login } from '../services/AuthService';
 import { LoginData, LoginResponse } from '../types/auth';
-import { AxiosResponse } from 'axios';
 
 export const useLoginUser = () => {
+  const [loading, setLoading] = useState<boolean>(false);
+  const [loginResponse, setLoginResponse] = useState<LoginResponse | null>(null);
+
   const [formData, setFormData] = useState<LoginData>({
     email: '',
     password: ''
@@ -18,16 +20,22 @@ export const useLoginUser = () => {
 
   const handleSubmit = async (event: React.ChangeEvent<HTMLInputElement>) => {
     event.preventDefault();
+    setLoading(true);
     try {
-      const response:AxiosResponse<LoginResponse> = await api.post('/auth/login', formData);
+      const response = await login(formData);
+      setLoginResponse(response);
     } catch (error) {
       console.error("Error en el inicio de sesion!", error);
-      }
+    } finally {
+      setLoading(false);
     }
+  }
 
     return {
       formData,
       handleChange,
-      handleSubmit
+      handleSubmit,
+      loading,
+      loginResponse
     }
 }
