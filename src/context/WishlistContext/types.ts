@@ -1,7 +1,7 @@
-import { Product } from '../../types/product';
+import { Wishlist } from '../../types/wishlist';
 
 export interface WishlistContextProps {
-  wishlistItems: Product[];
+  wishlistItems: Wishlist[];
   isInWishlist: (productId: number) => boolean;
   toggleWishlistItem: (productId: number) => Promise<void>;
   loading: boolean;
