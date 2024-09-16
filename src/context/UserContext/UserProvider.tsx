@@ -9,24 +9,13 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
-    useEffect(() => {
-    const dummyUser: User = {
-      id: 1,
-      nombreUsuario: 'MiNombreDeUsuario',
-      email: 'miUsuario@correo.com',
-    };
-    setUser(dummyUser);
-  }, []);
-
-  // Función para iniciar sesión
   const login = async (formData: LoginData) => {
     setLoading(true);
     setError(null);
     try {
       const response = await loginService(formData);
-      const loggedInUser = response.user as User; // Asegúrate de que el backend devuelve un objeto user
+      const loggedInUser = response.user as User;
       setUser(loggedInUser);
-      // Guardar el usuario en localStorage
       localStorage.setItem('user', JSON.stringify(loggedInUser));
     } catch (err) {
       setError('Error al iniciar sesión');
@@ -36,7 +25,6 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({ children
     }
   };
 
-  // Función para registrar un nuevo usuario
   const register = async (formData: RegisterData) => {
     setLoading(true);
     setError(null);
@@ -53,13 +41,11 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({ children
     }
   };
 
-  // Función para cerrar sesión
   const logout = () => {
     setUser(null);
     localStorage.removeItem('user');
   };
 
-  // Cargar el usuario desde localStorage al iniciar la aplicación
   useEffect(() => {
     const storedUser = localStorage.getItem('user');
     if (storedUser) {
