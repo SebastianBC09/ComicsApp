@@ -1,14 +1,14 @@
 import React, { useState } from 'react'
 import { IonButton, IonButtons, IonHeader, IonIcon, IonSearchbar, IonTitle, IonToolbar, IonModal, IonSelectOption, IonSelect } from '@ionic/react'
+import { useProductos } from '../../hooks/useProductos'
 import { bookOutline, funnelOutline, filmOutline, pricetagOutline} from 'ionicons/icons'
 import './HeaderBar.css'
-import { useGetProductos } from '../../hooks/useGetProductos'
 
 export const HeaderBar:React.FC = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [filters, setfilters] = useState({editorial: '', genero: '', categoria: ''});
   const [showFilters, setshowFilters] = useState(false);
-  const { productos, categorias } = useGetProductos();
+  const { productos, categorias } = useProductos();
 
   const handleSearchChange = (event: CustomEvent) => {
     setSearchQuery(event.detail.value);
