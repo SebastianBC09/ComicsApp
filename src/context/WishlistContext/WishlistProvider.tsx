@@ -35,7 +35,6 @@ export const WishlistProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     }
   };
 
-
   const isInWishlist = (productId: number): boolean => {
     return wishlistItems.some((item) => item.id === productId);
   };
@@ -51,10 +50,8 @@ export const WishlistProvider: React.FC<{ children: React.ReactNode }> = ({ chil
 
     try {
       if (isInWishlist(productId)) {
-
         await removeProductFromWishlist(user.id, productId);
       } else {
-
         await addProductToWishlist(user.id, productId);
       }
       await fetchWishlist();

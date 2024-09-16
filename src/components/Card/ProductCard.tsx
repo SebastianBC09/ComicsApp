@@ -8,6 +8,7 @@ import './ProductCard.css';
 
 const ProductCard:React.FC<Card> = ({producto, seeDetails}) => {
   const { isInWishlist, toggleWishlistItem, loading } = useWishlist();
+
   const inWishlist = isInWishlist(producto.id);
 
   const handleToggleWishlist = () => {
@@ -15,28 +16,49 @@ const ProductCard:React.FC<Card> = ({producto, seeDetails}) => {
   };
 
   return (
-    <IonCard className='product-card'>
-      <IonImg className="product-card--image" src={producto.imageURL} alt={producto.titulo}  />
+    <IonCard className="product-card">
+      <div className="card-content-wrapper">
+        <div className="image-wrapper">
+          <IonImg
+            className="product-card-image"
+            src={producto.imageURL}
+            alt={producto.titulo}
+          />
+          <IonIcon
+            icon={inWishlist ? heart : heartOutline}
+            className={`wishlist-icon ${inWishlist ? 'in-wishlist' : ''}`}
+            onClick={handleToggleWishlist}
+          />
+        </div>
 
-      <IonIcon
-        icon={inWishlist ? heart : heartOutline}
-        className='wishlist-icon'
-        onClick={handleToggleWishlist}
-        color={inWishlist ? 'danger' : 'medium'}
-      />
+        <div className="card-header">
+          <IonCardHeader>
+            <IonCardTitle className="product-card-title">
+              {producto.titulo}
+            </IonCardTitle>
+          </IonCardHeader>
+        </div>
 
-      <IonCardHeader>
-        <IonCardTitle>{producto.titulo}</IonCardTitle>
-      </IonCardHeader>
+        <div className="card-content">
+          <IonCardContent>
+            <p>
+              <strong>Editorial: </strong>
+              {producto.editorial}
+            </p>
+            <p>
+              <strong>Precio: </strong>${producto.precio.toFixed(2)}
+            </p>
+          </IonCardContent>
+        </div>
 
-      <IonCardContent>
-        <p><strong>Editorial: </strong>{producto.editorial}</p>
-        <p><strong>Precio: </strong>${producto.precio.toFixed(2)}</p>
-
-        <IonButton onClick={() => seeDetails(producto.id)} expand='block' color="primary">
+        <IonButton
+          onClick={() => seeDetails(producto.id)}
+          expand="block"
+          color="primary"
+        >
           Ver Detalles
         </IonButton>
-      </IonCardContent>
+      </div>
     </IonCard>
   )
 }
