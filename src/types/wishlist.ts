@@ -1,5 +1,8 @@
+import { Product } from "./product";
+
 export interface Wishlist {
   id: number;
   userId: number;
-  productId: number;
+  productoId: number;
+  producto: Product | null;
 }
