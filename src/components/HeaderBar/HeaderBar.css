@@ -1,0 +1,89 @@
+.toolbar {
+  --background: #F4F4F4;
+  color: #222222;
+  padding: 12px 12px;
+}
+
+ion-searchbar {
+  --background: #F4F4F4;
+  --placeholder-color: rgba(34, 34, 34, 0.6);
+  --icon-color: #222222;
+}
+
+.toolbar-filters {
+  --background: #F4F4F4;
+  padding: 10px 10px;
+}
+
+.header-title {
+  font-size: 1.5rem;
+  text-align: center;
+  font-weight: bold;
+  line-height: 1.5;
+  padding: 8px;
+}
+
+.header-search {
+  --background: #F4F4F4;
+  --placeholder-color: rgba(34, 34, 34, 0.6);
+  --icon-color: #222222;
+}
+
+ion-button {
+  --color: #FF6347;
+  --font-weight: bold;
+  --margin-left: 10px;
+}
+
+.filters-modal-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  padding: 20px;
+  height: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.filters-modal-content h2 {
+  margin-bottom: 20px;
+  font-size: 24px;
+  text-align: center;
+  color: #333;
+}
+
+.filters-modal-content ion-select {
+  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+  padding-left: 10px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.8);
+  --background: rgba(255, 255, 255, 0.8);
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  height: 45px; /* Ajustar la altura para que sean más compactos */
+}
+
+.filters-modal-content ion-select::part(text) {
+  margin-left: 10px;
+}
+
+.filters-modal-content ion-icon {
+  margin-right: 10px; /* Separar ícono del texto */
+  color: #333;
+}
+
+.filters-modal-content ion-button {
+  margin-top: 20px;
+  width: 100%;
+  --background: #ff4a4a;
+  color: white;
+  font-weight: bold;
+  border-radius: 10px;
+  height: 45px;
+  transition: transform 0.3s ease;
+}
+
+.filters-modal-content ion-button:hover {
+  transform: scale(1.05);
+}
