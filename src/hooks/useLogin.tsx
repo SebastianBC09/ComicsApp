@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { login } from '../services/AuthService';
 import { LoginData, LoginResponse } from '../types/auth';
 
-export const useLoginUser = () => {
+export const useLogin = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [loginResponse, setLoginResponse] = useState<LoginResponse | null>(null);
 

@@ -4,7 +4,7 @@ import { getProducts } from '../services/ProductService';
 import { Categoria } from '../types/category';
 import { Product } from '../types/product';
 
-export const useGetProductos = () => {
+export const useProductos = () => {
   const [productos, setProductos] = useState<Product[]>([]);
   const [categorias, setCategorias] = useState<Categoria[]>([]);
 
