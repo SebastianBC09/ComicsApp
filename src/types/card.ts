@@ -1,8 +1,11 @@
-import { Producto } from "./producto";
+import { Product } from "./product";
+import { User } from "./user";
+import { Wishlist } from "./wishlist";
 
 export interface Card {
-  producto: Producto
+  producto: Product
+  user: User
   seeDetails: (id: number) => void
-  isInWishlist: boolean
-  toggleWishlist: (producto: Producto) => void
+  wishlistItems: Wishlist[]
+
 }
