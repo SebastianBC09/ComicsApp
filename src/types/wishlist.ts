@@ -4,5 +4,5 @@ export interface Wishlist {
   id: number;
   userId: number;
   productoId: number;
-  producto: Product | null;
+  producto: Product;
 }
